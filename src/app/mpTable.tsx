@@ -51,6 +51,20 @@ export default class MpTable extends React.Component<any, any> {
                 },
             ]
         };
+
+        this.selectRow = this.selectRow.bind(this);
+    }
+
+    selectRow(index: number[]) {
+
+
+
+        this.setState({
+            data: _.map(this.state.data, (m: any, i: number) => {
+                m.selected = index.indexOf(i) != -1;
+                return m;
+            })
+        });
     }
 
     render() {
@@ -61,6 +75,7 @@ export default class MpTable extends React.Component<any, any> {
                 fixedFooter={this.state.fixedFooter}
                 selectable={this.state.selectable}
                 multiSelectable={this.state.multiSelectable}
+                onRowSelection={this.selectRow}
                 >
                 <TableHeader
                     displaySelectAll={this.state.showCheckboxes}
@@ -86,7 +101,7 @@ export default class MpTable extends React.Component<any, any> {
                     >
                     {
                         this.state.data.map((row: any, index: any) => (
-                            <TableRow key={index} selected={row.selected}>
+                            <TableRow key={index} selected={row.selected} >
                                 <TableRowColumn>{index}</TableRowColumn>
                                 <TableRowColumn>{row.name}</TableRowColumn>
                                 <TableRowColumn>{row.status}</TableRowColumn>
