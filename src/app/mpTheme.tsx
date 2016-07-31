@@ -10,12 +10,20 @@ interface MpTheme extends __MaterialUI.Styles.MuiTheme {
     body?: __React.CSSProperties
 }
 
-const commonTheme: __MaterialUI.Styles.MuiTheme = {
+const lightMpTheme: MpTheme = {
+    body: {
+        backgroundColor: Colors.fullWhite,
+        color: Colors.fullBlack
+    },
     palette: {
         primary1Color: lighten(mpColor, 0.3),
         accent1Color: mpColor,
         canvasColor: fade(Colors.fullWhite, 0.03),
         alternateTextColor: Colors.fullBlack
+    },
+    tableRow: {
+        hoverColor: fade(Colors.grey200, 0.3),
+        selectedColor: fade(Colors.grey400, 0.2),
     },
     tabs: {
         backgroundColor: fade(Colors.fullWhite, 0.3)
@@ -27,13 +35,6 @@ const commonTheme: __MaterialUI.Styles.MuiTheme = {
     }
 };
 
-const lightMpTheme: MpTheme = {
-    body: {
-        backgroundColor: Colors.fullWhite,
-        color: Colors.fullBlack
-    }
-};
-
 const darkMpTheme: MpTheme = {
     body: {
         backgroundColor: Colors.blueGrey900,
@@ -42,55 +43,17 @@ const darkMpTheme: MpTheme = {
     palette: {
         textColor: Colors.grey200,
         alternateTextColor: Colors.fullWhite
-    }
+    }   
 };
-
-// const lightTheme: __MaterialUI.Styles.MuiTheme = {
-//     palette: {
-//         primary1Color: Colors.cyan500,
-//         primary2Color: Colors.cyan700,
-//         primary3Color: Colors.grey400,
-//         accent1Color: Colors.pinkA200,
-//         accent2Color: Colors.grey100,
-//         accent3Color: Colors.grey500,
-//         textColor: Colors.darkBlack,
-//         alternateTextColor: Colors.white,
-//         canvasColor: Colors.white,
-//         borderColor: Colors.grey300,
-//         disabledColor: fade(Colors.darkBlack, 0.3),
-//         pickerHeaderColor: Colors.cyan500,
-//         clockCircleColor: fade(Colors.darkBlack, 0.07),
-//         shadowColor: Colors.fullBlack,
-//     }
-// };
-
-// const darkTheme: __MaterialUI.Styles.MuiTheme = {
-//     palette: {
-//         primary1Color: Colors.cyan700,
-//         primary2Color: Colors.cyan700,
-//         primary3Color: Colors.grey600,
-//         accent1Color: Colors.pinkA200,
-//         accent2Color: Colors.pinkA400,
-//         accent3Color: Colors.pinkA100,
-//         textColor: Colors.fullWhite,
-//         alternateTextColor: '#303030',
-//         canvasColor: '#303030',
-//         borderColor: fade(Colors.fullWhite, 0.3),
-//         disabledColor: fade(Colors.fullWhite, 0.3),
-//         pickerHeaderColor: fade(Colors.fullWhite, 0.12),
-//         clockCircleColor: fade(Colors.fullWhite, 0.12),
-//     }
-// };
 
 const muiTheme = (useDarkTheme: boolean) => {
 
-    var bodyStyle = (useDarkTheme ? darkMpTheme : lightMpTheme).body;
-    document.body.style.backgroundColor = bodyStyle.backgroundColor;
-    document.body.style.color = bodyStyle.color;
+    var theme = (useDarkTheme ? darkMpTheme : lightMpTheme);
+    document.body.style.backgroundColor = theme.body.backgroundColor;
+    document.body.style.color = theme.body.color;
 
     return getMuiTheme(
-        // useDarkTheme ? darkBaseTheme : lightBaseTheme,
-        commonTheme,
+        lightMpTheme,
         useDarkTheme ? darkMpTheme : lightMpTheme
     );
 }
