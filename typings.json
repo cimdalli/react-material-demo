@@ -1,0 +1,11 @@
+{
+  "globalDependencies": {
+    "material-ui": "registry:dt/material-ui#0.15.1+20160720000941",
+    "react": "registry:dt/react#0.14.0+20160720060442",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "react-tap-event-plugin": "registry:dt/react-tap-event-plugin#0.0.0+20160602142434"
+  },
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160723033700"
+  }
+}
