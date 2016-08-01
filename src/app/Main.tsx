@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from "lodash";
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { muiTheme } from "./mpTheme"
@@ -20,16 +21,58 @@ export default class Main extends React.Component<any, any> {
   constructor(props: any, state: any) {
     super(props, state);
 
-    this.toggleTheme = this.toggleTheme.bind(this);
-
     this.state = {
-      useDarkTheme: false
+      useDarkTheme: false,
+      data: [
+        {
+          name: 'John Smith',
+          status: 'Employed',
+          selected: false,
+        },
+        {
+          name: 'Randal White',
+          status: 'Unemployed',
+        },
+        {
+          name: 'Stephanie Sanders',
+          status: 'Employed',
+          selected: true,
+        },
+        {
+          name: 'Steve Brown',
+          status: 'Employed',
+        },
+        {
+          name: 'Joyce Whitten',
+          status: 'Employed',
+        },
+        {
+          name: 'Samuel Roberts',
+          status: 'Employed',
+        },
+        {
+          name: 'Adam Moore',
+          status: 'Employed',
+        },
+      ]
     };
+
+    this.toggleTheme = this.toggleTheme.bind(this);
+    this.handleDataSelection = this.handleDataSelection.bind(this);
   }
 
   toggleTheme() {
     this.setState({
       useDarkTheme: !this.state.useDarkTheme
+    });
+  }
+
+  handleDataSelection(index: number[]) {
+    this.setState({
+      data: _.map(this.state.data, (m: any, i: number) => {
+        m.selected = index.indexOf(i) !== -1;
+        return m;
+      })
     });
   }
 
@@ -75,7 +118,7 @@ export default class Main extends React.Component<any, any> {
       <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
         <div>
           <AppBar iconElementRight={swithTheme} zDepth={0}/>
-          <Navigation />
+          <Navigation data={this.state.data} onRowSelection={this.handleDataSelection}/>
           {swithTheme}
         </div>
       </MuiThemeProvider >

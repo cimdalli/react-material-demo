@@ -4,28 +4,21 @@ import Paper from 'material-ui/Paper';
 import {mpColor} from "./mpTheme"
 import MpTable from "./mpTable"
 
+
 interface NavigationState {
-    tab: string
-}
-
-const inkStyle: React.CSSProperties = {
-    // backgroundColor: mpColor
-};
-
-const tabLabelStyle: React.CSSProperties = {
-    // backgroundColor: "#fff",
-    // color: "#000"
+    tab?: string
 }
 
 export default class Navigation extends React.Component<any, NavigationState>{
     constructor(props: any, state: NavigationState) {
         super(props, state);
 
-        this.handleTabChange = this.handleTabChange.bind(this);
-
         this.state = {
-            tab: "merchant"
+            tab: "merchant",
+            
         };
+
+        this.handleTabChange = this.handleTabChange.bind(this);
     }
 
     handleTabChange(tab: string) {
@@ -40,13 +33,13 @@ export default class Navigation extends React.Component<any, NavigationState>{
                 <Tabs
                     value={this.state.tab}
                     onChange={this.handleTabChange}
-                    inkBarStyle={inkStyle}
-                    tabItemContainerStyle={tabLabelStyle}
                     >
                     <Tab label="Mağazalar" value="merchant" >
                         <div>
                             <h2>Mağazalar</h2>
-
+                            <Paper>
+                                <MpTable data={this.props.data} onRowSelection={this.props.onRowSelection}/>
+                            </Paper>
                         </div>
                     </Tab>
                     <Tab label="Raporlar" value="reports">
@@ -60,9 +53,6 @@ export default class Navigation extends React.Component<any, NavigationState>{
                         </div>
                     </Tab>
                 </Tabs>
-                <Paper>
-                    <MpTable />
-                </Paper>
             </div>
         );
     }
