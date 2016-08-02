@@ -15,16 +15,18 @@ export default class Navigation extends React.Component<any, NavigationState>{
 
         this.state = {
             tab: "merchant",
-            
+
         };
 
         this.handleTabChange = this.handleTabChange.bind(this);
     }
 
     handleTabChange(tab: string) {
-        this.setState({
-            tab: tab
-        });
+        if (typeof tab === "string") {
+            this.setState({
+                tab: tab
+            });
+        }
     }
 
     render() {
