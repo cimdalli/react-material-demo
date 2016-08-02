@@ -3,7 +3,7 @@ import { fade, darken, lighten, emphasize } from 'material-ui/utils/colorManipul
 import * as Colors from 'material-ui/styles/colors';
 
 
-const mpColor = "#ff8600";
+const mpColor = "#ff8600"; 
 
 class MpTheme {
 
