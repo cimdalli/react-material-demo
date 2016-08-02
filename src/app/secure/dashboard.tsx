@@ -1,12 +1,11 @@
 import * as React from 'react';
 import * as _ from "lodash";
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { muiTheme } from "./mpTheme"
 
+import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
-import Toggle from 'material-ui/Toggle';
+
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -25,7 +24,7 @@ interface MainState {
     value?: any
 }
 
-export default class Main extends React.Component<any, MainState> {
+export default class Dashboard extends React.Component<any, MainState> {
     constructor(props: any, state: MainState) {
         super(props, state);
 
@@ -66,16 +65,11 @@ export default class Main extends React.Component<any, MainState> {
             ]
         };
 
-        this.toggleTheme = this.toggleTheme.bind(this);
         this.handleDataSelection = this.handleDataSelection.bind(this);
         this.handleSideMenu = this.handleSideMenu.bind(this);
     }
 
-    toggleTheme() {
-        this.setState({
-            useDarkTheme: !this.state.useDarkTheme
-        });
-    }
+
 
     handleDataSelection(index: number[]) {
         this.setState({
@@ -93,12 +87,6 @@ export default class Main extends React.Component<any, MainState> {
     }
 
     render() {
-        var swithTheme =
-            <Toggle
-                onToggle={this.toggleTheme}
-                label={"dark:" + this.state.useDarkTheme}
-                toggled={!this.state.useDarkTheme}
-                />;
 
         var toolbar = <Toolbar>
             <ToolbarGroup firstChild={true}>
@@ -140,16 +128,22 @@ export default class Main extends React.Component<any, MainState> {
             <MenuItem onTouchTap={() => this.handleSideMenu(false) }>Menu Item 2</MenuItem>
         </Drawer>
 
+        var swithTheme =
+            <Toggle
+                onToggle={this.props.toggleTheme}
+                label={"dark:" + this.state.useDarkTheme}
+                toggled={!this.state.useDarkTheme}
+                />;
         return (
-            <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
-                <div>
-                    {sideMenu}
-                    <AppBar iconElementRight={swithTheme} onLeftIconButtonTouchTap={() => this.handleSideMenu(true) } zDepth={0}/>
-                    {toolbar}
-                    <Navigation data={this.state.data} onRowSelection={this.handleDataSelection}/>
-                    {swithTheme}
-                </div>
-            </MuiThemeProvider >
+            // <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
+            //     <div>
+            //         {sideMenu}
+            <AppBar iconElementRight={swithTheme} onLeftIconButtonTouchTap={() => this.handleSideMenu(true) } zDepth={0}/>
+            //         {toolbar}
+            //         <Navigation data={this.state.data} onRowSelection={this.handleDataSelection}/>
+            //         {swithTheme}
+            //     </div>
+            // </MuiThemeProvider >
         );
     }
 }
