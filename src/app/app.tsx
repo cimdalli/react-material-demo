@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import Router from "./router"
+import Router from "./config/router"
 
 // import * as todos from "./todos" 
 // Needed for onTouchTap
@@ -10,6 +10,9 @@ injectTapEventPlugin();
 
 // Render the main app react component into the app div.
 // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
-ReactDOM.render(<Router />, document.getElementById('app'));
+
+const router = <Router />;
+
+ReactDOM.render(router, document.getElementById('app'));
 
 // todos.test();

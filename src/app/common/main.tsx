@@ -3,12 +3,16 @@ import * as React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { muiTheme } from "./mpTheme"
 
+export interface MainState {
+    useDarkTheme: boolean;
+}
 
+export default class Main extends React.Component<any, MainState>{
 
-export default class Layout extends React.Component<any, any>{
-
-    constructor(props: any, state: any) {
+    constructor(props: any, state: MainState) {
         super(props, state);
+         var asd = this.context;
+         debugger;
 
         this.state = {
             useDarkTheme: false
@@ -25,9 +29,11 @@ export default class Layout extends React.Component<any, any>{
 
     render() {
         return (
-            <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
-                {this.props.children}
-            </MuiThemeProvider >
+            <div style={{ textAlign: "center" }}>
+                <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
+                    {this.props.children}
+                </MuiThemeProvider >
+            </div >
         );
     }
 } 
