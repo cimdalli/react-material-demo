@@ -16,18 +16,17 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 
 import Navigation from "./navigation"
 
-interface MainState {
+interface DashboardState {
     sideBarOpen?: boolean
     useDarkTheme?: boolean
     data?: any[]
     value?: any
 }
 
-export default class Dashboard extends React.Component<any, MainState> {
-    constructor(props: any, state: MainState) {
+export default class Dashboard extends React.Component<any, DashboardState> {
+    constructor(props: any, state: DashboardState) {
         super(props, state);
-
-        debugger;
+         
         this.state = {
             useDarkTheme: false,
             sideBarOpen: false,

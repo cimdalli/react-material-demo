@@ -8,25 +8,25 @@ export interface MainState {
     useDarkTheme: boolean;
 }
 
+export interface MainProps {
+    onToggleTheme: Function
+    children?: React.ReactElement<any>
+}
 
-class Main extends React.Component<any, MainState>{
 
-    constructor(props: any, state: MainState) {
+export default class Main extends React.Component<MainProps, MainState>{
+
+    constructor(props: MainProps, state: MainState) {
         super(props, state);
-        debugger;
+        
         this.state = {
             useDarkTheme: false
         }
 
-        this.toggleTheme = this.toggleTheme.bind(this);
+        this.onToggleTheme = this.onToggleTheme.bind(this);
     }
 
-    // context: IRouterContext;
-    // static contextTypes: React.ValidationMap<any> = {
-    //     router: React.PropTypes.func.isRequired
-    // }
-
-    toggleTheme() {
+    onToggleTheme() {
         this.setState({
             useDarkTheme: !this.state.useDarkTheme
         });
@@ -36,11 +36,12 @@ class Main extends React.Component<any, MainState>{
         return (
             <div style={{ textAlign: "center" }}>
                 <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
-                    {this.props.children}
+                    {
+                        this.props.children && React.cloneElement(this.props.children, {
+                            onToggleTheme: this.onToggleTheme
+                        }) }
                 </MuiThemeProvider >
             </div >
         );
     }
 }
-
-export default Main;

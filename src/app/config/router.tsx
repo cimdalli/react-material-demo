@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Router, Route, Redirect, RouterState, browserHistory, hashHistory, EnterHook } from 'react-router'
+import { IRoute, Router, Route, Redirect, RouterState, browserHistory, hashHistory, EnterHook } from 'react-router'
 import Main from "../common/main"
 import Login from "../public/login"
 import Dashboard from "../secure/dashboard"
@@ -20,17 +20,19 @@ const checkAuth: EnterHook = (nextState: RouterState, replace: any, callback?: F
     callback();
 }
 
+const routes =
+    <Route>
+        <Redirect from="/" to="dashboard" />
+        <Route component={Main} >
+            <Route path="login" component={Login} />
+            <Route component={AuthArea} onEnter={checkAuth}>
+                <Route path="dashboard" component={Dashboard} />
+            </Route>
+        </Route>
+    </Route>
 
 export default () => {
     return (
-        <Router history={hashHistory} >
-            <Redirect from="/" to="dashboard" />
-            <Route path="/" component={Main} >
-                <Route path="login" component={Login} />
-                <Route path="/" component={AuthArea} onEnter={checkAuth}>
-                    <Route path="dashboard" component={Dashboard} />
-                </Route>
-            </Route>
-        </Router>
+        <Router history={hashHistory} routes={routes} />
     );
 }

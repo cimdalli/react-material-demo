@@ -8,11 +8,8 @@ import Router from "./config/router"
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-// Render the main app react component into the app div.
-// For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
+// const router = <Router />; 
 
-const router = <Router />;
-
-ReactDOM.render(router, document.getElementById('app'));
+ReactDOM.render(<Router />, document.getElementById('app'));
 
 // todos.test();
