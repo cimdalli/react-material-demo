@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
-import {mpColor} from "../common/mpTheme"
 import MpTable from "./mpTable"
 
 

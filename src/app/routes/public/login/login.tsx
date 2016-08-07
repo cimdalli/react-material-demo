@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Router, IRouterProps, IRouterContext } from 'react-router'
+import { IRouterContext } from 'react-router'
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';

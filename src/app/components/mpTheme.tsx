@@ -3,7 +3,7 @@ import { fade, darken, lighten, emphasize } from 'material-ui/utils/colorManipul
 import * as Colors from 'material-ui/styles/colors';
 
 
-const mpColor = "#ff8600"; 
+const mpColor = "#ff8600";
 
 class MpTheme {
 
@@ -55,7 +55,7 @@ class MpTheme {
 const lightMpTheme = new MpTheme(Colors.fullWhite, Colors.fullBlack, mpColor);
 const darkMpTheme = new MpTheme(Colors.blueGrey900, Colors.grey300, mpColor);
 
-const muiTheme = (useDarkTheme: boolean) => {
+const mpTheme = (useDarkTheme: boolean) => {
 
     var theme = (useDarkTheme ? darkMpTheme : lightMpTheme);
     document.body.style.backgroundColor = theme.backgroundColor;
@@ -64,5 +64,5 @@ const muiTheme = (useDarkTheme: boolean) => {
     return getMuiTheme(theme.get());
 }
 
-export {muiTheme}
-export {mpColor}
+export { mpTheme }
+export { mpColor }
