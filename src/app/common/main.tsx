@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IRouterContext, IRouter } from 'react-router'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { muiTheme } from "./mpTheme"
@@ -7,19 +8,23 @@ export interface MainState {
     useDarkTheme: boolean;
 }
 
-export default class Main extends React.Component<any, MainState>{
+
+class Main extends React.Component<any, MainState>{
 
     constructor(props: any, state: MainState) {
         super(props, state);
-         var asd = this.context;
-         debugger;
-
+        debugger;
         this.state = {
             useDarkTheme: false
         }
 
         this.toggleTheme = this.toggleTheme.bind(this);
     }
+
+    // context: IRouterContext;
+    // static contextTypes: React.ValidationMap<any> = {
+    //     router: React.PropTypes.func.isRequired
+    // }
 
     toggleTheme() {
         this.setState({
@@ -36,4 +41,6 @@ export default class Main extends React.Component<any, MainState>{
             </div >
         );
     }
-} 
+}
+
+export default Main;

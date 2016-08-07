@@ -1,20 +1,15 @@
 import * as React from 'react';
+import { Router, IRouterProps, IRouterContext } from 'react-router'
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { EnterHook, RouteProps, RouterContext  } from 'react-router'
 
 
-interface LoginProps {
 
-}
+export default class Login extends React.Component<any, any>{
 
-export default class Login extends React.Component<LoginProps, any>{
-
-    constructor(props: LoginProps, state: any) {
+    constructor(props: any, state: any) {
         super(props, state);
-        var asd = this.context;
-        debugger;
         this.login = this.login.bind(this);
     }
 
@@ -24,15 +19,9 @@ export default class Login extends React.Component<LoginProps, any>{
         password?: TextField
     }
 
-    // context:{
-    //     router: 
-    // }
-
-    componentWillMount() {
-
-        if (!!localStorage.getItem("auth")) {
-            // this.props..push('/login');
-        }
+    context: IRouterContext;
+    static contextTypes: React.ValidationMap<any> = {
+        router: React.PropTypes.object
     }
 
     login() {
@@ -40,6 +29,7 @@ export default class Login extends React.Component<LoginProps, any>{
         var password = this.refs.password.getValue();
 
         localStorage.setItem("auth", "auth");
+        this.context.router.push("dashboard");
     }
 
     render() {

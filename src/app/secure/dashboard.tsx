@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as _ from "lodash";
 
-
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
@@ -28,6 +27,7 @@ export default class Dashboard extends React.Component<any, MainState> {
     constructor(props: any, state: MainState) {
         super(props, state);
 
+        debugger;
         this.state = {
             useDarkTheme: false,
             sideBarOpen: false,
@@ -66,7 +66,7 @@ export default class Dashboard extends React.Component<any, MainState> {
         };
 
         this.handleDataSelection = this.handleDataSelection.bind(this);
-        this.handleSideMenu = this.handleSideMenu.bind(this);
+        this.handleSideMenuToggle = this.handleSideMenuToggle.bind(this);
     }
 
 
@@ -80,7 +80,7 @@ export default class Dashboard extends React.Component<any, MainState> {
         });
     }
 
-    handleSideMenu(open: boolean) {
+    handleSideMenuToggle(open: boolean) {
         this.setState({
             sideBarOpen: open
         });
@@ -122,10 +122,10 @@ export default class Dashboard extends React.Component<any, MainState> {
             docked={false}
             width={300}
             open={this.state.sideBarOpen}
-            onRequestChange={this.handleSideMenu}
+            onRequestChange={this.handleSideMenuToggle}
             >
-            <MenuItem onTouchTap={() => this.handleSideMenu(false) }>Menu Item</MenuItem>
-            <MenuItem onTouchTap={() => this.handleSideMenu(false) }>Menu Item 2</MenuItem>
+            <MenuItem onTouchTap={() => this.handleSideMenuToggle(false) }>Menu Item</MenuItem>
+            <MenuItem onTouchTap={() => this.handleSideMenuToggle(false) }>Menu Item 2</MenuItem>
         </Drawer>
 
         var swithTheme =
@@ -135,15 +135,13 @@ export default class Dashboard extends React.Component<any, MainState> {
                 toggled={!this.state.useDarkTheme}
                 />;
         return (
-            // <MuiThemeProvider muiTheme= { muiTheme(this.state.useDarkTheme) } >
-            //     <div>
-            //         {sideMenu}
-            <AppBar iconElementRight={swithTheme} onLeftIconButtonTouchTap={() => this.handleSideMenu(true) } zDepth={0}/>
-            //         {toolbar}
-            //         <Navigation data={this.state.data} onRowSelection={this.handleDataSelection}/>
-            //         {swithTheme}
-            //     </div>
-            // </MuiThemeProvider >
+            <div>
+                {sideMenu}
+                <AppBar iconElementRight={swithTheme} onLeftIconButtonTouchTap={() => this.handleSideMenuToggle(true) } zDepth={0}/>
+                {toolbar}
+                <Navigation data={this.state.data} onRowSelection={this.handleDataSelection}/>
+                {swithTheme}
+            </div>
         );
     }
 }
