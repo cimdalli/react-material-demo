@@ -1,13 +1,34 @@
 import * as React from 'react';
 import { IRouterContext } from 'react-router'
+import 'reflect-metadata'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { mpTheme } from "../components/mpTheme"
 
 
+
+
+class ContextDecarators {
+    static contextAwareClass: ClassDecorator = (target: any) => {
+        debugger;
+    };
+
+    static getContextMethod<T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) {
+        debugger;
+    };
+}
+
+@ContextDecarators.contextAwareClass
 class ContextAwareComponent<P, S, C> extends React.Component<P, S>{
     context: C;
+
+    @ContextDecarators.getContextMethod
+    getContext(c: C): C {
+        return;
+    }
 }
+
+
 
 export interface RootState {
     useDarkTheme?: boolean
@@ -18,7 +39,7 @@ export interface RootContext {
     router: IRouterContext
 }
 
-export default class Root extends React.Component<any, RootState>
+export default class Root extends ContextAwareComponent<any, RootState, RootContext>
 {
     constructor(props: any, context: RootContext) {
         super(props, context);

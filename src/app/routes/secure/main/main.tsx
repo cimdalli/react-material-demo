@@ -30,7 +30,7 @@ export default class Main extends React.Component<any, MainState>{
     constructor(props: any, context: MainContext) {
         super(props, context);
 
-        debugger;
+        // debugger;
         this.state = {
             sideBarOpen: false
         }
