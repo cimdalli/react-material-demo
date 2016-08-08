@@ -29,7 +29,6 @@ const goToDashboard: EnterHook = (nextState: RouterState, replace: any, callback
 //HMR workaround
 const routes =
     <Route component={Root} onChange={checkAuth} >
-        <Redirect from="/" to="dashboard" />
         <Route path="login" component={Login} />
         <Route component={Main} >
             <Route path="dashboard" component={Dashboard} />

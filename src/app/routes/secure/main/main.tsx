@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IRouterContext } from 'react-router'
+
 
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
@@ -15,46 +15,31 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton  from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
-import {RootState} from "../../root"
+import {RootState, RootContext} from "../../root"
 
 export interface MainState extends RootState {
     sideBarOpen?: boolean
     value?: any
 }
 
-// export interface MainProps {
-//     onToggleTheme: Function
-//     children?: React.ReactElement<any>
-// }
-
+export interface MainContext extends RootContext {
+}
 
 export default class Main extends React.Component<any, MainState>{
 
-    constructor(props: any, state: MainState) {
-        super(props, state);
+    constructor(props: any, context: MainContext) {
+        super(props, context);
 
         debugger;
         this.state = {
             sideBarOpen: false
         }
 
-        this.handleToggleTheme = this.handleToggleTheme.bind(this);
         this.handleToggleSideMenu = this.handleToggleSideMenu.bind(this);
         this.logout = this.logout.bind(this);
     }
 
-    context: IRouterContext;
-    static contextTypes: React.ValidationMap<any> = {
-        router: React.PropTypes.object,
-        useDarkTheme: React.PropTypes.object
-    }
-
-
-    handleToggleTheme() {
-        this.setState({
-            useDarkTheme: !this.state.useDarkTheme
-        });
-    }
+    // static contextTypes: MainContext;
 
     handleToggleSideMenu(open: boolean) {
         this.setState({
@@ -64,7 +49,7 @@ export default class Main extends React.Component<any, MainState>{
 
     logout() {
         localStorage.removeItem("auth");
-        this.context.router.push("dashboard");
+        // this.context.router.push("dashboard");
     }
 
     render() {
@@ -112,7 +97,7 @@ export default class Main extends React.Component<any, MainState>{
 
         var swithTheme =
             <Toggle
-                onToggle={this.handleToggleTheme}
+                // onToggle={this.handleToggleTheme}
                 label={"dark:" + this.state.useDarkTheme}
                 toggled={!this.state.useDarkTheme}
                 />;
