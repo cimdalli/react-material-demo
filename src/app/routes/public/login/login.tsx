@@ -8,8 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 @Router
 export default class Login extends React.Component<any, any>{
 
-    constructor(props: any, state: any) {
-        super(props, state);
+    constructor() {
+        super();
+
         this.login = this.login.bind(this);
     }
 

@@ -10,8 +10,8 @@ interface DashboardState {
 }
 
 export default class Dashboard extends React.Component<DashboardProps, DashboardState> {
-    constructor(props: DashboardProps, state: DashboardState) {
-        super(props, state);
+    constructor() {
+        super();
 
         this.state = {
             data: [
@@ -66,7 +66,7 @@ export default class Dashboard extends React.Component<DashboardProps, Dashboard
 
         return (
             <div>
-               dasboard
+                dasboard
             </div>
         );
 

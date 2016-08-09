@@ -10,8 +10,8 @@ interface RootState {
 
 export default class Root extends React.Component<any, RootState>
 {
-    constructor(props: any, context: any) {
-        super(props, context);
+    constructor() {
+        super();
 
         this.state = {
             useDarkTheme: false

@@ -24,8 +24,8 @@ interface MainState {
 @Router
 export default class Main extends React.Component<any, MainState>{
 
-    constructor(props: any, context: any) {
-        super(props, context);
+    constructor() {
+        super();
 
         this.state = {
             sideBarOpen: false
