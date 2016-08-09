@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 
+import rootReducer from "./reducers/root"
+
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { StoreBuilder } from "./store/builder"
@@ -19,6 +21,7 @@ injectTapEventPlugin();
 const store = new StoreBuilder()
     .withMiddleware(routerMiddleware(hashHistory))
     .withReducer("routing", routerReducer)
+    .withReducer("root", rootReducer)
     .build();
 
 const history = syncHistoryWithStore(hashHistory, store);

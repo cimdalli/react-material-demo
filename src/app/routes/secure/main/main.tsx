@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { Router, IRouterContext } from '../../../decorators/router'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux";
+import { changeTheme } from '../../../actions/root'
+
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
@@ -21,8 +25,25 @@ interface MainState {
     value?: any
 }
 
+function mapDispatchToProps(dispatch: any) {
+    return {
+        actions: bindActionCreators(changeTheme, dispatch)
+    };
+}
+
+function mapStateToProps(state: MainState): {} {
+    return {};
+}
+
+// const ConnectedMyView = connect(mapStateToProps)(Main);
+
+interface MainProps {
+    actions: any;
+}
+
 @Router
-export default class Main extends React.Component<any, MainState>{
+@connect(mapStateToProps)
+export default class Main extends React.Component<MainProps, MainState> {
 
     constructor() {
         super();
@@ -49,6 +70,7 @@ export default class Main extends React.Component<any, MainState>{
     }
 
     render() {
+        debugger;
         var toolbar =
             <Toolbar>
                 <ToolbarGroup firstChild={true}>
