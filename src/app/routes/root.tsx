@@ -1,47 +1,16 @@
 import * as React from 'react';
-import { IRouterContext } from 'react-router'
-import 'reflect-metadata'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { mpTheme } from "../components/mpTheme"
 
 
-
-
-class ContextDecarators {
-    static contextAwareClass: ClassDecorator = (target: any) => {
-        debugger;
-    };
-
-    static getContextMethod<T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) {
-        debugger;
-    };
-}
-
-@ContextDecarators.contextAwareClass
-class ContextAwareComponent<P, S, C> extends React.Component<P, S>{
-    context: C;
-
-    @ContextDecarators.getContextMethod
-    getContext(c: C): C {
-        return;
-    }
-}
-
-
-
-export interface RootState {
+interface RootState {
     useDarkTheme?: boolean
 }
 
-export interface RootContext {
-    handleToggleTheme: Function
-    router: IRouterContext
-}
-
-export default class Root extends ContextAwareComponent<any, RootState, RootContext>
+export default class Root extends React.Component<any, RootState>
 {
-    constructor(props: any, context: RootContext) {
+    constructor(props: any, context: any) {
         super(props, context);
 
         this.state = {
@@ -50,8 +19,6 @@ export default class Root extends ContextAwareComponent<any, RootState, RootCont
 
         this.handleToggleTheme = this.handleToggleTheme.bind(this);
     }
-
-    // static contextTypes: RootContext;
 
     handleToggleTheme() {
         this.setState({
@@ -63,11 +30,7 @@ export default class Root extends ContextAwareComponent<any, RootState, RootCont
         return (
             <div style={{ textAlign: "center" }}>
                 <MuiThemeProvider muiTheme= { mpTheme(this.state.useDarkTheme) } >
-                    {
-                        this.props.children && React.cloneElement(this.props.children, {
-                            onToggleTheme: this.handleToggleTheme
-                        })
-                    }
+                    {this.props.children}
                 </MuiThemeProvider >
             </div >
         );

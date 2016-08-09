@@ -1,5 +1,6 @@
 import * as React from 'react';
-
+import { IRouterContext } from 'react-router'
+import {Router} from '../../../decorators/router'
 
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
@@ -15,22 +16,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton  from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
-import {RootState, RootContext} from "../../root"
 
-export interface MainState extends RootState {
+interface MainState {
     sideBarOpen?: boolean
     value?: any
 }
 
-export interface MainContext extends RootContext {
-}
-
+@Router
 export default class Main extends React.Component<any, MainState>{
 
-    constructor(props: any, context: MainContext) {
+    constructor(props: any, context: any) {
         super(props, context);
 
-        // debugger;
         this.state = {
             sideBarOpen: false
         }
@@ -39,7 +36,7 @@ export default class Main extends React.Component<any, MainState>{
         this.logout = this.logout.bind(this);
     }
 
-    // static contextTypes: MainContext;
+    context: IRouterContext;
 
     handleToggleSideMenu(open: boolean) {
         this.setState({
@@ -49,7 +46,7 @@ export default class Main extends React.Component<any, MainState>{
 
     logout() {
         localStorage.removeItem("auth");
-        // this.context.router.push("dashboard");
+        this.context.router.push("dashboard");
     }
 
     render() {
@@ -98,8 +95,8 @@ export default class Main extends React.Component<any, MainState>{
         var swithTheme =
             <Toggle
                 // onToggle={this.handleToggleTheme}
-                label={"dark:" + this.state.useDarkTheme}
-                toggled={!this.state.useDarkTheme}
+                // label={"dark:" + this.state.useDarkTheme}
+                // toggled={!this.state.useDarkTheme}
                 />;
 
         var logoutButton =
