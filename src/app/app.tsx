@@ -2,11 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'
+import { Router, hashHistory } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
-import store from "./store/config"
-import Router from "./routes/router"
+import { StoreBuilder } from "./store/builder"
+import routes from "./routes/routes"
 
 
 // import * as todos from "./todos" 
@@ -14,10 +16,20 @@ import Router from "./routes/router"
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+const store = new StoreBuilder()
+    .withMiddleware(routerMiddleware(hashHistory))
+    .withReducer("routing", routerReducer)
+    .build();
+
+const history = syncHistoryWithStore(hashHistory, store);
+
+
 ReactDOM.render(
-    <Provider store={store}>
-        <Router />
-    </Provider>,
-    document.getElementById('app'));
+    <Provider store={ store }>
+        <Router history={ history }>
+            { routes }
+        </Router>
+    </Provider>
+    , document.getElementById('app'));
 
 // todos.test();

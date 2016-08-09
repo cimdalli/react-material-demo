@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { IRouterContext } from 'react-router'
-import {Router} from '../../../decorators/router'
+import { Router, IRouterContext } from '../../../decorators/router'
 
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';

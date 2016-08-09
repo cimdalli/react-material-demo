@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { IRouterContext } from 'react-router'
+import { Router, IRouterContext } from '../../../decorators/router'
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
-
+@Router
 export default class Login extends React.Component<any, any>{
 
     constructor(props: any, state: any) {
@@ -20,9 +20,6 @@ export default class Login extends React.Component<any, any>{
     }
 
     context: IRouterContext;
-    static contextTypes: React.ValidationMap<any> = {
-        router: React.PropTypes.object
-    }
 
     login() {
         var username = this.refs.username.getValue();
