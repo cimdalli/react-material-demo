@@ -22,6 +22,11 @@ const store = new StoreBuilder()
     .withMiddleware(routerMiddleware(hashHistory))
     .withReducer("routing", routerReducer)
     .withReducer("root", rootReducer)
+    // .withInitialState({
+    //     root: {
+    //         useDarkTheme: false
+    //     }
+    // })
     .build();
 
 const history = syncHistoryWithStore(hashHistory, store);

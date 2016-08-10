@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Router, IRouterContext } from '../../../decorators/router'
 
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
+import { Dispatch, Action } from "redux";
 import { changeTheme } from '../../../actions/root'
 
 import Toggle from 'material-ui/Toggle';
@@ -25,25 +25,19 @@ interface MainState {
     value?: any
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapStateToProps(state: any) {
     return {
-        actions: bindActionCreators(changeTheme, dispatch)
+        useDarkTheme: state.root.useDarkTheme
     };
 }
 
-function mapStateToProps(state: MainState): {} {
-    return {};
-}
-
-// const ConnectedMyView = connect(mapStateToProps)(Main);
-
 interface MainProps {
-    actions: any;
+    dispatch: Dispatch<any>;
+    useDarkTheme: boolean;
 }
 
 @Router
-@connect(mapStateToProps)
-export default class Main extends React.Component<MainProps, MainState> {
+class Main extends React.Component<MainProps, MainState> {
 
     constructor() {
         super();
@@ -70,7 +64,6 @@ export default class Main extends React.Component<MainProps, MainState> {
     }
 
     render() {
-        debugger;
         var toolbar =
             <Toolbar>
                 <ToolbarGroup firstChild={true}>
@@ -115,9 +108,9 @@ export default class Main extends React.Component<MainProps, MainState> {
 
         var swithTheme =
             <Toggle
-                // onToggle={this.handleToggleTheme}
-                // label={"dark:" + this.state.useDarkTheme}
-                // toggled={!this.state.useDarkTheme}
+                onToggle={() => { this.props.dispatch(changeTheme()) } }
+                label={"dark:" + this.props.useDarkTheme}
+                toggled={this.props.useDarkTheme}
                 />;
 
         var logoutButton =
@@ -149,3 +142,5 @@ export default class Main extends React.Component<MainProps, MainState> {
         );
     }
 }
+
+export default connect(mapStateToProps)(Main)
