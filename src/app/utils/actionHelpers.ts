@@ -12,16 +12,16 @@ export abstract class BaseAction implements Action {
     constructor() {
         this.type = this.type;
     }
-
-    // is<T extends Action>(actionClass: IAction<T>): this is T {
-    //     return this.type == actionClass.prototype.type;
-    // }
 }
 
 export function Action(name: string) {
     return function <T extends Action>(actionClass: IAction<T>) {
         actionClass.prototype.type = name;
     }
+}
+
+export function isType<T extends Action>(action: Action, actionClass: IAction<T>): action is T {
+    return action.type == actionClass.prototype.type;
 }
 
 export const typedToPlainMiddleware: Middleware = (store: any) => (next: any) => (action: any) => {

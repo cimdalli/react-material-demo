@@ -1,6 +1,6 @@
 // import { fromJS } from 'immutable';
-import { Action, Reducer } from 'redux'
-import { BaseAction } from '../utils/actionHelpers'
+import { Reducer } from 'redux'
+import { BaseAction, isType } from '../utils/actionHelpers'
 import { ChangeTheme } from '../actions'
 
 // const INITIAL_STATE = fromJS({
@@ -8,7 +8,7 @@ import { ChangeTheme } from '../actions'
 // });
 
 const INITIAL_STATE: LayoutState = {
-    useDarkTheme: false,
+    useDarkTheme: false
 };
 
 
@@ -18,7 +18,7 @@ export interface LayoutState {
 
 export const layoutReducer: Reducer<LayoutState> = (state = INITIAL_STATE, action: BaseAction) => {
 
-    if (action instanceof ChangeTheme) {
+    if (isType(action, ChangeTheme)) {
         return {
             useDarkTheme: !state.useDarkTheme
         };
