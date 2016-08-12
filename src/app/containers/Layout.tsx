@@ -16,8 +16,8 @@ function mapStateToProps(state: StoreState): LayoutProps {
     };
 }
 
-class Layout extends React.Component<LayoutProps, any>
-{
+class Layout extends React.Component<LayoutProps, any>{
+
     render() {
         return (
             <div style={{ textAlign: "center" }}>
@@ -27,6 +27,8 @@ class Layout extends React.Component<LayoutProps, any>
             </div >
         );
     }
+
 }
+
 
 export default connect(mapStateToProps)(Layout)

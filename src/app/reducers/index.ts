@@ -1,4 +1,4 @@
-import * as Layout from "./layout"
+import * as Layout from "./layoutReducer"
 import { ReducersMapObject } from 'redux'
 
 

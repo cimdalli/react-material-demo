@@ -4,9 +4,12 @@ import { Provider } from 'react-redux'
 import { Router, Route, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 
+import thunk from 'redux-thunk';
+
 import { reducers, StoreState } from "../reducers"
 import { StoreBuilder } from "../utils/storeBuilder"
 import { authChecker, goToPath } from '../utils/routeHelpers'
+import { typedToPlainMiddleware } from '../utils/actionHelpers'
 
 import Layout from './Layout'
 import Login from './Login'
@@ -22,7 +25,9 @@ export default class Root extends React.Component<any, any>{
         super();
 
         this.store = new StoreBuilder()
+            .withMiddleware(typedToPlainMiddleware)
             .withMiddleware(routerMiddleware(hashHistory))
+            .withMiddleware(thunk)
             .withReducer("routing", routerReducer)
             .withReducersMap(reducers)
             .build<StoreState>();

@@ -1,5 +1,5 @@
-import { ChangeTheme } from "./layout"
+import { ChangeTheme } from "./layoutActions"
 
-export  {
-    ChangeTheme
+export {
+ChangeTheme
 }
