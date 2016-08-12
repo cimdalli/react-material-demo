@@ -4,18 +4,19 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { mpTheme } from "../components/mpTheme"
 
+import { StoreState } from '../reducers'
 
-interface RootProps {
+interface LayoutProps {
     useDarkTheme: boolean;
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: StoreState): LayoutProps {
     return {
-        useDarkTheme: state.root.useDarkTheme
+        useDarkTheme: state.layout.useDarkTheme
     };
 }
 
-class Root extends React.Component<RootProps, any>
+class Layout extends React.Component<LayoutProps, any>
 {
     render() {
         return (
@@ -28,4 +29,4 @@ class Root extends React.Component<RootProps, any>
     }
 }
 
-export default connect(mapStateToProps)(Root)
+export default connect(mapStateToProps)(Layout)

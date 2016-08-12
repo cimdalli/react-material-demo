@@ -1,12 +1,20 @@
 import * as React from 'react';
-import { Router, IRouterContext } from '../../../decorators/router'
+
+import { connect } from 'react-redux'
+import { Dispatch } from "redux";
+import { StoreState } from '../reducers'
+import { push } from 'react-router-redux'
+
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
-@Router
-export default class Login extends React.Component<any, any>{
+interface LoginProps {
+    dispatch: Dispatch<any>;
+}
+
+class Login extends React.Component<LoginProps, any>{
 
     constructor() {
         super();
@@ -20,14 +28,12 @@ export default class Login extends React.Component<any, any>{
         password?: TextField
     }
 
-    context: IRouterContext;
-
     login() {
         var username = this.refs.username.getValue();
         var password = this.refs.password.getValue();
 
         localStorage.setItem("auth", "auth");
-        this.context.router.push("dashboard");
+        this.props.dispatch(push("dashboard"))
     }
 
     render() {
@@ -67,3 +73,5 @@ export default class Login extends React.Component<any, any>{
         );
     }
 }
+
+export default connect()(Login)

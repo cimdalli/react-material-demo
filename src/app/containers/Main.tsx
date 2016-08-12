@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Router, IRouterContext } from '../../../decorators/router'
 
 import { connect } from 'react-redux'
-import { Dispatch, Action } from "redux";
-import { changeTheme } from '../../../actions/root'
+import { Dispatch } from "redux";
+import { StoreState } from '../reducers'
+import { ChangeTheme } from '../actions'
+import { push } from 'react-router-redux'
 
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
@@ -25,18 +26,17 @@ interface MainState {
     value?: any
 }
 
-function mapStateToProps(state: any) {
-    return {
-        useDarkTheme: state.root.useDarkTheme
-    };
-}
-
 interface MainProps {
     dispatch: Dispatch<any>;
     useDarkTheme: boolean;
 }
 
-@Router
+function mapStateToProps(state: StoreState) {
+    return {
+        useDarkTheme: state.layout.useDarkTheme
+    };
+}
+
 class Main extends React.Component<MainProps, MainState> {
 
     constructor() {
@@ -50,8 +50,6 @@ class Main extends React.Component<MainProps, MainState> {
         this.logout = this.logout.bind(this);
     }
 
-    context: IRouterContext;
-
     handleToggleSideMenu(open: boolean) {
         this.setState({
             sideBarOpen: open
@@ -60,7 +58,7 @@ class Main extends React.Component<MainProps, MainState> {
 
     logout() {
         localStorage.removeItem("auth");
-        this.context.router.push("dashboard");
+        this.props.dispatch(push("dashboard"));
     }
 
     render() {
@@ -108,7 +106,7 @@ class Main extends React.Component<MainProps, MainState> {
 
         var swithTheme =
             <Toggle
-                onToggle={() => { this.props.dispatch(changeTheme()) } }
+                onToggle={() => { this.props.dispatch(new ChangeTheme()) } }
                 label={"dark:" + this.props.useDarkTheme}
                 toggled={this.props.useDarkTheme}
                 />;
@@ -144,3 +142,4 @@ class Main extends React.Component<MainProps, MainState> {
 }
 
 export default connect(mapStateToProps)(Main)
+

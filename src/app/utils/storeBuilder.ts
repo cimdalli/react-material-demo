@@ -1,3 +1,4 @@
+import * as _ from 'lodash'
 import {
     Store,
     Reducer,
@@ -35,12 +36,17 @@ export class StoreBuilder {
         return this;
     }
 
-    public build() {
+    public withReducersMap(reducers: ReducersMapObject) {
+        _.merge(this.reducers, reducers);
+        return this;
+    }
+
+    public build<T>() {
         let middlewares = applyMiddleware(...this.middlewares);
         let reducers = combineReducers(this.reducers);
         let composer = compose(middlewares)(createStore);
         let store = composer(reducers, this.initialState);
 
-        return store;
+        return store as Store<T>;
     }
 }
