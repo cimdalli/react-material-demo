@@ -1,15 +1,24 @@
 import * as React from 'react';
-import { IRouterContext } from 'react-router'
+
+import { connect } from 'react-redux'
+import { Dispatch } from "redux";
+import { StoreState } from '../reducers'
+import { push } from 'react-router-redux'
+
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
+interface LoginProps {
+    dispatch: Dispatch<any>;
+}
 
-export default class Login extends React.Component<any, any>{
+class Login extends React.Component<LoginProps, any>{
 
-    constructor(props: any, state: any) {
-        super(props, state);
+    constructor() {
+        super();
+
         this.login = this.login.bind(this);
     }
 
@@ -19,17 +28,12 @@ export default class Login extends React.Component<any, any>{
         password?: TextField
     }
 
-    context: IRouterContext;
-    static contextTypes: React.ValidationMap<any> = {
-        router: React.PropTypes.object
-    }
-
     login() {
         var username = this.refs.username.getValue();
         var password = this.refs.password.getValue();
 
         localStorage.setItem("auth", "auth");
-        this.context.router.push("dashboard");
+        this.props.dispatch(push("dashboard"))
     }
 
     render() {
@@ -69,3 +73,5 @@ export default class Login extends React.Component<any, any>{
         );
     }
 }
+
+export default connect()(Login)

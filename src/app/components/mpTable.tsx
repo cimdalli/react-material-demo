@@ -7,8 +7,8 @@ interface MpTableProps extends __MaterialUI.Table.TableProps {
 }
 
 export default class MpTable extends React.Component<MpTableProps, any> {
-    constructor(props: MpTableProps, state: any) {
-        super(props, state);
+    constructor() {
+        super();
     }
 
     render() {

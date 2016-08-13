@@ -9,8 +9,8 @@ interface NavigationState {
 }
 
 export default class Navigation extends React.Component<any, NavigationState>{
-    constructor(props: any, state: NavigationState) {
-        super(props, state);
+    constructor() {
+        super();
 
         this.state = {
             tab: "merchant",

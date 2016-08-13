@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { IRouterContext } from 'react-router'
-import {Router} from '../../../decorators/router'
+import * as React from 'react'
 
 import Toggle from 'material-ui/Toggle';
 import Drawer from 'material-ui/Drawer';
@@ -16,41 +14,37 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton  from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
+interface TopBarProps {
+    toggleTheme: () => void;
+    logout: () => void;
+    useDarkTheme: boolean;
+}
 
-interface MainState {
+interface TopBarState {
     sideBarOpen?: boolean
     value?: any
 }
 
-@Router
-export default class Main extends React.Component<any, MainState>{
+export class TopBar extends React.Component<TopBarProps, TopBarState> {
 
-    constructor(props: any, context: any) {
-        super(props, context);
+    constructor() {
+        super();
 
         this.state = {
             sideBarOpen: false
         }
 
-        this.handleToggleSideMenu = this.handleToggleSideMenu.bind(this);
-        this.logout = this.logout.bind(this);
+        this.toggleSideMenu = this.toggleSideMenu.bind(this);
     }
 
-    context: IRouterContext;
-
-    handleToggleSideMenu(open: boolean) {
+    toggleSideMenu(open: boolean) {
         this.setState({
             sideBarOpen: open
         });
     }
 
-    logout() {
-        localStorage.removeItem("auth");
-        this.context.router.push("dashboard");
-    }
-
     render() {
-        var toolbar =
+        const toolbar =
             <Toolbar>
                 <ToolbarGroup firstChild={true}>
                     <DropDownMenu value={this.state.value}>
@@ -81,49 +75,43 @@ export default class Main extends React.Component<any, MainState>{
                 </ToolbarGroup>
             </Toolbar>;
 
-        var sideMenu =
+        const sideMenu =
             <Drawer
                 docked={false}
                 width={300}
                 open={this.state.sideBarOpen}
-                onRequestChange={this.handleToggleSideMenu}
+                onRequestChange={this.toggleSideMenu}
                 >
-                <MenuItem onTouchTap={() => this.handleToggleSideMenu(false) }>Menu Item</MenuItem>
-                <MenuItem onTouchTap={() => this.handleToggleSideMenu(false) }>Menu Item 2</MenuItem>
+                <MenuItem onTouchTap={() => this.toggleSideMenu(false) }>Menu Item</MenuItem>
+                <MenuItem onTouchTap={() => this.toggleSideMenu(false) }>Menu Item 2</MenuItem>
             </Drawer>
 
-        var swithTheme =
+        const themeToggle =
             <Toggle
-                // onToggle={this.handleToggleTheme}
-                // label={"dark:" + this.state.useDarkTheme}
-                // toggled={!this.state.useDarkTheme}
+                onToggle={ this.props.toggleTheme }
+                label={"dark:" + this.props.useDarkTheme}
+                toggled={this.props.useDarkTheme}
                 />;
 
-        var logoutButton =
+        const logoutButton =
             <FlatButton
-                onClick={this.logout}
+                onClick={this.props.logout}
                 label="logout"
                 />
 
-        var appBarRightElement =
+        const appBarRightElement =
             <div style={{ display: "inline-block" }}>
-                {swithTheme}
+                {themeToggle}
                 {logoutButton}
             </div>
 
-        // var childProps = {
-        //     this.props.children && React.cloneElement(this.props.children, {
-        //         onToggleTheme: this.handleToggleTheme
-        //     })
-        // };
 
         return (
             <div>
                 {sideMenu}
-                <AppBar iconElementRight={appBarRightElement} onLeftIconButtonTouchTap={() => this.handleToggleSideMenu(true) } zDepth={0}/>
+                <AppBar iconElementRight={appBarRightElement} onLeftIconButtonTouchTap={() => this.toggleSideMenu(true) } zDepth={0}/>
                 {toolbar}
-                {swithTheme}
-                {this.props.children}
+                {themeToggle}
             </div>
         );
     }

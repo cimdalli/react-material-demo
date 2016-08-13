@@ -7,7 +7,7 @@
         "target": "es5",
         "jsx": "react",
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "noEmitHelpers": true
     },
     "filesGlob": [
         "./typings/index.d.ts",

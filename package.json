@@ -5,11 +5,16 @@
     "build": "webpack --config webpack.dev.config.js --progress --colors"
   },
   "dependencies": {
-    "material-ui": "^0.15.2",
+    "material-ui": "^0.15.4",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-router-redux": "^4.0.5",
+    "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "ts-helpers": "^1.1.1"
   },
   "devDependencies": {
     "html-webpack-plugin": "^2.22.0",
