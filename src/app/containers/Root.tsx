@@ -8,13 +8,9 @@ import thunk from 'redux-thunk';
 
 import { reducers, StoreState } from "../reducers"
 import { StoreBuilder } from "../utils/storeBuilder"
-import { authChecker, goToPath } from '../utils/routeHelpers'
 import { typedToPlainMiddleware } from '../utils/actionHelpers'
 
-import Layout from './Layout'
-import Login from './Login'
-import Main from './Main'
-import Dashboard from './Dashboard'
+import routes from '../routes'
 
 
 export default class Root extends React.Component<any, any>{
@@ -35,22 +31,10 @@ export default class Root extends React.Component<any, any>{
         this.history = syncHistoryWithStore(hashHistory, this.store);
     }
 
-    routes =
-    <Route component={Layout} onChange={authChecker('login', 'dashboard', 'auth') } >
-        <Route path="login" component={Login} />
-        <Route component={Main} >
-            <Route path="dashboard" component={Dashboard} />
-        </Route>
-        <Route onEnter={goToPath('dashboard') } path="*"/>
-    </Route>
-
     render() {
-
         return (
             <Provider store={ this.store }>
-                <Router history={ this.history }>
-                    {this.routes}
-                </Router>
+                <Router history={ this.history } routes={ routes } />
             </Provider>
         );
     }
