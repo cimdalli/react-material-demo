@@ -1,26 +1,21 @@
-import * as _ from 'lodash'
-
-import { Reducer } from 'redux'
-import { BaseAction, isType } from '../utils/actionHelpers'
+import { ReducerBuilder } from '../utils/reducerBuilder'
 import { ChangeTheme } from '../actions'
-
-
-const INITIAL_STATE: LayoutState = {
-    useDarkTheme: false
-};
 
 
 export interface LayoutState {
     useDarkTheme: boolean;
 }
 
-export const layoutReducer: Reducer<LayoutState> = (state = INITIAL_STATE, action: BaseAction) => {
+export const layoutReducer = new ReducerBuilder<LayoutState>()
 
-    if (isType(action, ChangeTheme)) {
-        return _.merge({}, state, {
+    .init({
+        useDarkTheme: false
+    })
+
+    .action(ChangeTheme, (state) => {
+        return {
             useDarkTheme: !state.useDarkTheme
-        });
-    }
+        };
+    })
 
-    return state;
-}
+    .build();

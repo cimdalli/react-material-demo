@@ -1,5 +1,8 @@
 import { ChangeTheme } from "./layoutActions"
+import { Login, Logout } from "./authActions"
 
 export {
-ChangeTheme
+ChangeTheme,
+Login,
+Logout
 }

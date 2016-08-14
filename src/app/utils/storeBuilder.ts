@@ -44,7 +44,7 @@ export class StoreBuilder {
     public build<T>() {
         let middlewares = applyMiddleware(...this.middlewares);
         let reducers = combineReducers(this.reducers);
-        let composer = compose(middlewares)(createStore);
+        let composer = compose(middlewares, (<any>window).devToolsExtension ? (<any>window).devToolsExtension() : f => f)(createStore);
         let store = composer(reducers, this.initialState);
 
         return store as Store<T>;

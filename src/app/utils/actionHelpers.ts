@@ -3,7 +3,7 @@ import { Action, Middleware } from 'redux'
 
 
 //http://www.bluewire-technologies.com/2015/redux-actions-for-typescript/
-interface IAction<T extends Action> {
+export interface IAction<T extends Action> {
     prototype: T;
 }
 
@@ -20,9 +20,13 @@ export function Action(name: string) {
     }
 }
 
-export function isType<T extends Action>(action: Action, actionClass: IAction<T>): action is T {
-    return action.type == actionClass.prototype.type;
-}
+// export function isType<T extends Action>(action: Action, actionClass: IAction<T>): action is T {
+//     return action.type == actionClass.prototype.type;
+// }
+
+// export function getType<T extends Action>(action: Action): action is T {
+//     return action.type;
+// }
 
 export const typedToPlainMiddleware: Middleware = (store: any) => (next: any) => (action: any) => {
     next(_.merge({}, action));

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux'
 import { Dispatch } from "redux";
 import { StoreState } from '../reducers'
-import { ChangeTheme } from '../actions'
+import { ChangeTheme, Logout } from '../actions'
 import { push } from 'react-router-redux'
 
 import { TopBar } from '../components/topBar'
@@ -30,7 +30,7 @@ class Main extends React.Component<MainProps, any> {
 
 
     logout() {
-        localStorage.removeItem("auth");
+        this.props.dispatch(new Logout());
         this.props.dispatch(push("dashboard"));
     }
 

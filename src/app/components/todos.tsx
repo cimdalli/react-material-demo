@@ -36,7 +36,7 @@ export function test() {
         },
         {
             type: ActionType.ADD,
-            text: "egesu"
+            text: "ege su"
         }
     ];
 
