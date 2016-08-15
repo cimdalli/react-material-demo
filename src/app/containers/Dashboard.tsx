@@ -10,7 +10,7 @@ interface DashboardState {
     data?: any[]
 }
 
-export default class Dashboard extends React.Component<DashboardProps, DashboardState> {
+export default class DashboardContainer extends React.Component<DashboardProps, DashboardState> {
     constructor() {
         super();
 

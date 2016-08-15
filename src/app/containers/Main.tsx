@@ -19,7 +19,7 @@ function mapStateToProps(state: StoreState) {
     };
 }
 
-class Main extends React.Component<MainProps, any> {
+class MainContainer extends React.Component<MainProps, any> {
 
     constructor() {
         super();
@@ -31,7 +31,6 @@ class Main extends React.Component<MainProps, any> {
 
     logout() {
         this.props.dispatch(new Logout());
-        this.props.dispatch(push("dashboard"));
     }
 
     toggleTheme() {
@@ -53,5 +52,5 @@ class Main extends React.Component<MainProps, any> {
     }
 }
 
-export default connect(mapStateToProps)(Main)
+export default connect(mapStateToProps)(MainContainer)
 

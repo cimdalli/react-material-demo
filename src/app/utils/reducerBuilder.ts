@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 
 import { Reducer } from 'redux'
-import { BaseAction, IAction } from '../utils/actionHelpers'
+import { SyncAction, IAction } from '../utils/actionHelpers'
 
 
 export class ReducerBuilder<State> {
@@ -15,19 +15,19 @@ export class ReducerBuilder<State> {
         return this;
     }
 
-    public action<T extends BaseAction>(actionType: IAction<T>, actionBody: (state: State, action?: T) => State) {
+    public action<T extends SyncAction>(actionType: IAction<T>, actionBody: (state: State, action?: T) => State) {
         this.actions[actionType.prototype.type] = actionBody;
         return this;
     }
 
     public build() {
-        return (state: State, action: BaseAction) => {
+        return (state: State = this.initState, action: SyncAction) => {
             let type = action.type;
             let actionBody = this.actions[type];
-            state = state || this.initState;
 
             if (!!actionBody) {
-                return _.merge({}, state, actionBody(state, action));
+                let nextState = actionBody(state, action);
+                return _.merge({}, state, nextState);
             }
 
             return state;

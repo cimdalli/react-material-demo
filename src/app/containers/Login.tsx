@@ -2,8 +2,7 @@ import * as React from 'react';
 
 import { connect } from 'react-redux'
 import { Dispatch } from "redux";
-import { StoreState } from '../reducers'
-import { push } from 'react-router-redux'
+import { Login } from '../actions'
 
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -14,7 +13,7 @@ interface LoginProps {
     dispatch: Dispatch<any>;
 }
 
-class Login extends React.Component<LoginProps, any>{
+class LoginContainer extends React.Component<LoginProps, any>{
 
     constructor() {
         super();
@@ -32,8 +31,7 @@ class Login extends React.Component<LoginProps, any>{
         var username = this.refs.username.getValue();
         var password = this.refs.password.getValue();
 
-        localStorage.setItem("auth", "auth");
-        this.props.dispatch(push("dashboard"))
+        this.props.dispatch(new Login(username, password));
     }
 
     render() {
@@ -74,4 +72,4 @@ class Login extends React.Component<LoginProps, any>{
     }
 }
 
-export default connect()(Login)
+export default connect()(LoginContainer)
