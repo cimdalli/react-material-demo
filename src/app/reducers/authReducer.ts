@@ -11,10 +11,6 @@ export const authReducer = new ReducerBuilder<AuthState>()
     .init({})
 
     .action(Login, (state, action) => {
-        //async Login
-        let  username = action.username;
-        let  password = action.password;
-
         const token = "token";
 
         localStorage.setItem(action.getTokenKey(), token);

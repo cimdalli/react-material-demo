@@ -4,9 +4,22 @@ import { push } from 'react-router-redux'
 
 const tokenKey = "auth";
 
+
+@Action("LOGIN_REQUEST")
+export class LoginRequest extends AsyncAction {
+    constructor(public username: string, public password: string) {
+        super();
+
+        this.then(dispatch => {
+            fetch("https://www.google.com/search?q=${username}+${password}")       
+            return this;
+        });
+    }
+}
+
 @Action("LOGIN")
 export class Login extends AsyncAction {
-    constructor(public username: string, public password: string) {
+    constructor(public token: string) {
         super();
 
         this.then(dispatch => {

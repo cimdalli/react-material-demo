@@ -1,5 +1,6 @@
 import { ReducerBuilder } from '../utils/reducerBuilder'
-import { ChangeTheme, ShowLoading, HideLoading } from '../actions'
+import { ShowLoading, HideLoading } from '../utils/actionHelpers'
+import { ChangeTheme } from '../actions'
 
 
 export interface LayoutState {
