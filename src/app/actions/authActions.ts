@@ -11,7 +11,11 @@ export class LoginRequest extends AsyncAction {
         super();
 
         this.then(dispatch => {
-            fetch("https://www.google.com/search?q=${username}+${password}")       
+            fetch(`https://httpbin.org/get?username=${username}&password=${password}`)
+                .then(x => x.json())
+                .then(data => {
+                    dispatch(new Login(data.args.username + "|" + data.args.password));
+                });
             return this;
         });
     }
