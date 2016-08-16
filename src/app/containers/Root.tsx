@@ -6,7 +6,8 @@ import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-rou
 
 import { reducers, StoreState } from "../reducers"
 import { StoreBuilder } from "../utils/storeBuilder"
-import { typedToPlainMiddleware, asyncMiddleware } from '../utils/actionHelpers'
+// import { typedToPlainMiddleware, asyncMiddleware } from '../utils/actionHelpers'
+import thunkMiddleware from 'redux-thunk'
 
 import routes from '../routes'
 
@@ -19,8 +20,9 @@ export default class RootContainer extends React.Component<any, any>{
         super();
 
         this.store = new StoreBuilder()
-            .withMiddleware(typedToPlainMiddleware)
-            .withMiddleware(asyncMiddleware)
+            // .withMiddleware(typedToPlainMiddleware)
+            // .withMiddleware(asyncMiddleware)
+            .withMiddleware(thunkMiddleware)
             .withMiddleware(routerMiddleware(hashHistory))
             .withReducer("routing", routerReducer)
             .withReducersMap(reducers)
