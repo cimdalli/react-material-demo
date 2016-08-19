@@ -30,11 +30,3 @@ export function authChecker(loginPath: string, authenticatedPath: string, storag
         callback();
     }
 }
-
-export function goToPath(path: string) {
-
-    return (nextState: RouterState, replace: any, callback?: Function) => {
-        replace(normalizeUrl(path));
-        callback();
-    };
-}

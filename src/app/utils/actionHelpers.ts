@@ -80,5 +80,6 @@ export const asyncMiddleware: Middleware =
 
             return nextState;
         }
+        
         return next(action);
     };
