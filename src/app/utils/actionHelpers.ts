@@ -17,7 +17,6 @@ export abstract class SyncAction implements Redux.Action {
 type NullableDispatch = Dispatch<any> | void;
 
 export abstract class AsyncAction extends SyncAction implements Promise<NullableDispatch> {
-    async: boolean = true;
     resolve: (value?: Dispatch<any>) => void;
     reject: (reason?: any) => void;
     promise: Promise<Dispatch<any>> = new Promise<Dispatch<any>>((resolve, reject) => {
@@ -47,6 +46,10 @@ export class ShowLoading extends SyncAction { }
 export class HideLoading extends SyncAction { }
 
 
+const isAsyncAction = (action: AsyncAction | any): action is AsyncAction => {
+    return (<AsyncAction>action).promise !== undefined;
+}
+
 export const typedToPlainMiddleware: Middleware =
     <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>): Dispatch<S> => (action: any) => {
         if (typeof action === "object") {
@@ -56,17 +59,26 @@ export const typedToPlainMiddleware: Middleware =
     };
 
 export const asyncMiddleware: Middleware =
-    <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>): Dispatch<S> => (action: any) => {
-        if (!!action.async) {
-            setTimeout(() => {
-                store.dispatch(new ShowLoading());
+    <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>): Dispatch<S> => (action: AsyncAction | Redux.Action) => {
+        if (isAsyncAction(action)) {
+
+            //First dispatch show loading action synchronously
+            store.dispatch(new ShowLoading());
+
+            //Change state immediately and register async operations
+            var nextState = next(action);
+
+            //Lastly dispatch hide loading action
+            action.then(dispatch => {
+                dispatch(new HideLoading());
             });
+
+            //Resolve dispatch in order to handle async operations
             setTimeout(() => {
-                (action as AsyncAction).resolve(store.dispatch);
+                action.resolve(store.dispatch);
             });
-            setTimeout(() => {
-                store.dispatch(new HideLoading());
-            });
+
+            return nextState;
         }
         return next(action);
     };
