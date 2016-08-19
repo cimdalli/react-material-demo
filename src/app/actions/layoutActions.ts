@@ -1,5 +1,5 @@
 import { Action, SyncAction } from '../utils/actionHelpers'
 
 
-@Action("CHANGE_THEME")
+@Action
 export class ChangeTheme extends SyncAction { }

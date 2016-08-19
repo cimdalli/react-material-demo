@@ -15,7 +15,7 @@ export class ReducerBuilder<State> {
         return this;
     }
 
-    public action<T extends SyncAction>(actionType: IAction<T>, actionBody: (state: State, action?: T) => State) {
+    public handle<T extends SyncAction>(actionType: IAction<T>, actionBody: (state: State, action?: T) => State) {
         this.actions[actionType.prototype.type] = actionBody;
         return this;
     }

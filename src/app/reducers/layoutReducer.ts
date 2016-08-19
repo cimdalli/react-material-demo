@@ -15,20 +15,20 @@ export const layoutReducer = new ReducerBuilder<LayoutState>()
         asyncCount: 0
     })
 
-    .action(ChangeTheme, (state) => {
+    .handle(ChangeTheme, (state) => {
         return {
             useDarkTheme: !state.useDarkTheme
         };
     })
 
-    .action(ShowLoading, (state) => {
+    .handle(ShowLoading, (state) => {
         let count = state.asyncCount;
         return {
             asyncCount: ++count
         };
     })
 
-    .action(HideLoading, (state) => {
+    .handle(HideLoading, (state) => {
         let count = state.asyncCount;
         return {
             asyncCount: --count

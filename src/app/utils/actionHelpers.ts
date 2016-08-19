@@ -33,28 +33,18 @@ export abstract class AsyncAction extends SyncAction implements Promise<Dispatch
     }
 }
 
-export function Action(name: string) {
-    return function <T extends Redux.Action>(actionClass: IAction<T>) {
-        actionClass.prototype.type = name;
-    }
+export function Action<T extends SyncAction>(actionClass: IAction<T>) {
+    actionClass.prototype.type = actionClass.toString().match(/\w+/g)[1];;
 }
 
 
-@Action("SHOW_LOADING")
+@Action
 export class ShowLoading extends SyncAction { }
 
 
-@Action("HIDE_LOADING")
+@Action
 export class HideLoading extends SyncAction { }
 
-
-// export function isType<T extends Action>(action: Action, actionClass: IAction<T>): action is T {
-//     return action.type == actionClass.prototype.type;
-// }
-
-// export function getType<T extends Action>(action: Action): action is T {
-//     return action.type;
-// }
 
 export const typedToPlainMiddleware: Middleware =
     <S>(store: MiddlewareAPI<S>) => (next: Dispatch<S>): Dispatch<S> => (action: any) => {

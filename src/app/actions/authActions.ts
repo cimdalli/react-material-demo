@@ -5,7 +5,7 @@ import { push } from 'react-router-redux'
 const tokenKey = "auth";
 
 
-@Action("LOGIN_REQUEST")
+@Action
 export class LoginRequest extends AsyncAction {
     constructor(public username: string, public password: string) {
         super();
@@ -15,21 +15,17 @@ export class LoginRequest extends AsyncAction {
                 .then(x => x.json())
                 .then(data => {
                     dispatch(new Login(data.args.username + "|" + data.args.password));
+                    dispatch(push("dashboard"));
                 });
             return this;
         });
     }
 }
 
-@Action("LOGIN")
-export class Login extends AsyncAction {
+@Action
+export class Login extends SyncAction {
     constructor(public token: string) {
         super();
-
-        this.then(dispatch => {
-            dispatch(push("dashboard"));
-            return this;
-        });
     }
 
     getTokenKey() {
@@ -37,7 +33,7 @@ export class Login extends AsyncAction {
     }
 }
 
-@Action("LOGOUT")
+@Action
 export class Logout extends AsyncAction {
     constructor() {
         super();

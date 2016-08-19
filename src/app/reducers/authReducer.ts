@@ -10,19 +10,19 @@ export interface AuthState {
 export const authReducer = new ReducerBuilder<AuthState>()
     .init({})
 
-    .action(Login, (state, action) => {
+    .handle(Login, (state, action) => {
         const token = action.token;
 
         localStorage.setItem(action.getTokenKey(), token);
-        
+
         return {
             token: token
         };
     })
 
-    .action(Logout, (state, action) => {
+    .handle(Logout, (state, action) => {
         localStorage.removeItem(action.getTokenKey());
-        
+
         return {
             token: null
         };
