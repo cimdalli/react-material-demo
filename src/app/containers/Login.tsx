@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { connect } from 'react-redux'
 import { Dispatch } from "redux";
-import { LoginRequest } from '../actions'
+import { Login } from '../actions'
 
 import Paper  from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -31,7 +31,7 @@ class LoginContainer extends React.Component<LoginProps, any>{
         var username = this.refs.username.getValue();
         var password = this.refs.password.getValue();
 
-        this.props.dispatch(new LoginRequest(username, password));
+        this.props.dispatch(new Login(username, password));
     }
 
     render() {

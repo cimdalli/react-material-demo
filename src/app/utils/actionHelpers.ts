@@ -14,7 +14,9 @@ export abstract class SyncAction implements Redux.Action {
     }
 }
 
-export abstract class AsyncAction extends SyncAction implements Promise<Dispatch<any>> {
+type NullableDispatch = Dispatch<any> | void;
+
+export abstract class AsyncAction extends SyncAction implements Promise<NullableDispatch> {
     async: boolean = true;
     resolve: (value?: Dispatch<any>) => void;
     reject: (reason?: any) => void;
@@ -23,13 +25,12 @@ export abstract class AsyncAction extends SyncAction implements Promise<Dispatch
         this.reject = reject;
     });
 
-    then(onfulfilled?: (value: Dispatch<any>) => Dispatch<any> | PromiseLike<Dispatch<any>>,
-        onrejected?: (reason: any) => void): Promise<Dispatch<any>> {
+    then(onfulfilled?: (value: Dispatch<any>) => NullableDispatch | PromiseLike<NullableDispatch>, onrejected?: (reason: any) => void): Promise<NullableDispatch> {
         return this.promise.then(onfulfilled, onrejected);
     }
 
-    catch(onrejected?: (reason: any) => Dispatch<any> | PromiseLike<Dispatch<any>>): Promise<Dispatch<any>> {
-        return this.promise.then(onrejected);
+    catch(onrejected?: (reason: any) => NullableDispatch | PromiseLike<NullableDispatch>): Promise<NullableDispatch> {
+        return this.promise.catch(onrejected);
     }
 }
 

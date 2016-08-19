@@ -1,12 +1,13 @@
 import * as _ from 'lodash'
 
-import { Reducer } from 'redux'
 import { SyncAction, IAction } from '../utils/actionHelpers'
 
 
+type Reducer<State, ActionType extends SyncAction> = (state: State, action?: ActionType) => State;
+
 export class ReducerBuilder<State> {
 
-    actions: { [type: string]: Reducer<State> } = {};
+    actions: { [type: string]: Reducer<State, SyncAction> } = {};
     initState: State;
 
 
@@ -15,7 +16,7 @@ export class ReducerBuilder<State> {
         return this;
     }
 
-    public handle<T extends SyncAction>(actionType: IAction<T>, actionBody: (state: State, action?: T) => State) {
+    public handle<T extends SyncAction>(actionType: IAction<T>, actionBody: Reducer<State, T>) {
         this.actions[actionType.prototype.type] = actionBody;
         return this;
     }
