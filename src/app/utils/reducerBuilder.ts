@@ -21,13 +21,16 @@ export class ReducerBuilder<State> {
         return this;
     }
 
-    public build() {
+    public build(mergeToState: boolean = true) {
         return (state: State = this.initState, action: SyncAction) => {
             let type = action.type;
             let actionBody = this.actions[type];
 
             if (!!actionBody) {
                 let nextState = actionBody(state, action);
+                if (!mergeToState) {
+                    return nextState;
+                }
                 return _.merge({}, state, nextState);
             }
 

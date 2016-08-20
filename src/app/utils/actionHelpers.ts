@@ -68,12 +68,12 @@ export const asyncMiddleware: Middleware =
             //Change state immediately and register async operations
             var nextState = next(action);
 
-            //Lastly dispatch hide loading action
+            //Lastly dispatch hide loading action asynchronously
             action.then(dispatch => {
                 dispatch(new HideLoading());
             });
 
-            //Resolve dispatch in order to handle async operations
+            //After original dispatch lifecycle, resolve dispatch in order to handle async operations
             setTimeout(() => {
                 action.resolve(store.dispatch);
             });
