@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router'
 
-import { authChecker, goToPath } from './utils/routeHelpers'
+import { authChecker } from './utils/routeHelpers'
 
 import Layout from './containers/Layout'
 import Login from './containers/Login'
