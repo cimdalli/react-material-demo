@@ -16,7 +16,7 @@ export default class RootContainer extends React.Component<any, any>{
 
     constructor() {
         super();
-
+        
         this.store = new StoreBuilder()
             .withMiddleware(typedToPlainMiddleware)
             .withMiddleware(asyncMiddleware)
