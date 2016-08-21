@@ -1,4 +1,4 @@
-import { Action, SyncAction } from '../utils/actionHelpers'
+import { Action, SyncAction } from 'redux-ts'
 
 
 @Action

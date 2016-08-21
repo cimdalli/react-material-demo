@@ -1,5 +1,4 @@
-import { ReducerBuilder } from '../utils/reducerBuilder'
-import { ShowLoading, HideLoading } from '../utils/actionHelpers'
+import { ReducerBuilder, ShowLoading, HideLoading } from 'redux-ts'
 import { ChangeTheme } from '../actions'
 
 

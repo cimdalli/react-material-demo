@@ -5,8 +5,7 @@ import { Router, Route, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 
 import { reducers, StoreState } from "../reducers"
-import { StoreBuilder } from "../utils/storeBuilder"
-import { typedToPlainMiddleware, asyncMiddleware } from '../utils/actionHelpers'
+import { StoreBuilder, typedToPlainMiddleware, asyncMiddleware } from 'redux-ts'
 
 import routes from '../routes'
 

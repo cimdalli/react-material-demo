@@ -4,8 +4,12 @@
     "material-ui": "registry:dt/material-ui",
     "react": "registry:dt/react",
     "react-dom": "registry:dt/react-dom",
+    "react-redux": "registry:dt/react-redux",
     "react-router": "registry:dt/react-router",
+    "react-router-redux": "registry:dt/react-router-redux",
+    "react-router/history": "registry:dt/react-router/history",
     "react-tap-event-plugin": "registry:dt/react-tap-event-plugin",
+    "redux": "registry:dt/redux",
     "whatwg-fetch": "registry:dt/whatwg-fetch"
   },
   "dependencies": {

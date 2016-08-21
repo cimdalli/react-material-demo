@@ -1,4 +1,4 @@
-import { ReducerBuilder } from '../utils/reducerBuilder'
+import { ReducerBuilder } from 'redux-ts'
 import { Login, Logout, SetToken } from '../actions'
 import { push } from 'react-router-redux'
 

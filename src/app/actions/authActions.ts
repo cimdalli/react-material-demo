@@ -1,4 +1,4 @@
-import { Action, SyncAction, AsyncAction } from '../utils/actionHelpers'
+import { Action, SyncAction, AsyncAction } from 'redux-ts'
 import { push } from 'react-router-redux'
 
 
