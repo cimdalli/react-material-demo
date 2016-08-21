@@ -1,5 +1,5 @@
-import { Action, BaseAction } from '../utils/actionHelpers'
+import { Action, SyncAction } from 'redux-ts'
 
 
-@Action("CHANGE_THEME")
-export class ChangeTheme extends BaseAction { }
+@Action
+export class ChangeTheme extends SyncAction { }

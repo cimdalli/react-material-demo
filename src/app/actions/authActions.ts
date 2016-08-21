@@ -1,22 +1,24 @@
-import { Action, BaseAction } from '../utils/actionHelpers'
+import { Action, SyncAction, AsyncAction } from 'redux-ts'
+import { push } from 'react-router-redux'
 
-const tokenKey = "auth";
 
-@Action("LOGIN")
-export class Login extends BaseAction {
-    constructor(public token: string) {
+@Action
+export class Login extends AsyncAction {
+    constructor(public username: string, public password: string) {
         super();
-    }
-
-    getTokenKey() {
-        return tokenKey;
     }
 }
 
+@Action
+export class Logout extends AsyncAction { }
 
-@Action("LOGOUT")
-export class Logout extends BaseAction {
+
+@Action
+export class SetToken extends SyncAction {
+    constructor(public token: string) {
+        super();
+    }
     getTokenKey() {
-        return tokenKey;
+        return "auth";
     }
 }

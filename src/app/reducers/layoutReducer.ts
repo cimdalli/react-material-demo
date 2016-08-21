@@ -1,20 +1,36 @@
-import { ReducerBuilder } from '../utils/reducerBuilder'
+import { ReducerBuilder, ShowLoading, HideLoading } from 'redux-ts'
 import { ChangeTheme } from '../actions'
 
 
 export interface LayoutState {
-    useDarkTheme: boolean;
+    useDarkTheme?: boolean;
+    asyncCount?: number;
 }
 
 export const layoutReducer = new ReducerBuilder<LayoutState>()
 
     .init({
-        useDarkTheme: false
+        useDarkTheme: false,
+        asyncCount: 0
     })
 
-    .action(ChangeTheme, (state) => {
+    .handle(ChangeTheme, (state) => {
         return {
             useDarkTheme: !state.useDarkTheme
+        };
+    })
+
+    .handle(ShowLoading, (state) => {
+        let count = state.asyncCount;
+        return {
+            asyncCount: ++count
+        };
+    })
+
+    .handle(HideLoading, (state) => {
+        let count = state.asyncCount;
+        return {
+            asyncCount: --count
         };
     })
 

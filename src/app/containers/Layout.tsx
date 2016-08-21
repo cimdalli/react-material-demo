@@ -16,7 +16,7 @@ function mapStateToProps(state: StoreState): LayoutProps {
     };
 }
 
-class Layout extends React.Component<LayoutProps, any>{
+class LayoutContainer extends React.Component<LayoutProps, any>{
 
     render() {
         return (
@@ -31,4 +31,4 @@ class Layout extends React.Component<LayoutProps, any>{
 }
 
 
-export default connect(mapStateToProps)(Layout)
+export default connect(mapStateToProps)(LayoutContainer)
