@@ -1,5 +1,4 @@
 import { Action, SyncAction, AsyncAction } from 'redux-ts'
-import { push } from 'react-router-redux'
 
 
 @Action
