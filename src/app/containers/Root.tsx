@@ -5,7 +5,7 @@ import { Router, Route, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 
 import { reducers, StoreState } from "../reducers"
-import { StoreBuilder, typedToPlainMiddleware, asyncMiddleware } from 'redux-ts'
+import { StoreBuilder } from 'redux-ts'
 
 import routes from '../routes'
 
@@ -17,13 +17,11 @@ export default class RootContainer extends React.Component<any, any>{
     constructor() {
         super();
         
-        this.store = new StoreBuilder()
-            .withMiddleware(typedToPlainMiddleware)
-            .withMiddleware(asyncMiddleware)
+        this.store = new StoreBuilder<StoreState>()
             .withMiddleware(routerMiddleware(hashHistory))
             .withReducer("routing", routerReducer)
             .withReducersMap(reducers)
-            .build<StoreState>();
+            .build();
 
         this.history = syncHistoryWithStore(hashHistory, this.store);
     }

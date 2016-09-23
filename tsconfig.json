@@ -12,6 +12,6 @@
     "filesGlob": [
         "./typings/index.d.ts",
         "./custom_typings/**/*.d.ts",
-        "./src/**/*.tsx"
+        "./src/**/*.tsx?"
     ]
 }
