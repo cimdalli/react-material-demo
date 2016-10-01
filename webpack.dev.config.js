@@ -41,7 +41,7 @@ const config = {
             {
                 test: /\.tsx?$/,
                 exclude: /(node_modules)/,
-                loaders: ['react-hot', 'ts-loader']
+                loaders: ['react-hot-loader/webpack', 'ts-loader']
             }
         ]
     },

@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import 'ts-helpers'
-import './utils/promiseHelper'
 
 import Root from './containers/Root'
 
