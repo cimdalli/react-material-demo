@@ -1,5 +1,5 @@
-import { ReducerBuilder, ShowLoading, HideLoading } from 'redux-ts'
-import { ChangeTheme } from '../actions'
+import { ReducerBuilder } from 'redux-ts'
+import { ChangeTheme, ShowLoading, HideLoading } from '../actions'
 
 
 export interface LayoutState {

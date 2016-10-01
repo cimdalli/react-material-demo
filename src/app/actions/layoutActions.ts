@@ -1,5 +1,6 @@
-import { Action, SyncAction } from 'redux-ts'
+import { SyncAction } from 'redux-ts'
 
 
-@Action
 export class ChangeTheme extends SyncAction { }
+export class ShowLoading extends SyncAction { }
+export class HideLoading extends SyncAction { }

@@ -1,32 +1,31 @@
 import { ReducerBuilder } from 'redux-ts'
-import { Login, Logout, SetToken } from '../actions'
+import { Login, Logout, SetToken, ShowLoading, HideLoading } from '../actions'
 import { push } from 'react-router-redux'
 
 
 export interface AuthState {
     token?: string;
-    inProgress?: boolean;
 }
 
 export const authReducer = new ReducerBuilder<AuthState>()
     .init({})
 
     .handle(Login, (state, action) => {
-        
-        if (!state.inProgress) {
-            action.then(dispatch => {
-                fetch(`https://httpbin.org/get?username=${action.username}&password=${action.password}`)
-                    .then(x => x.json())
-                    .then(data => {
-                        dispatch(new SetToken(data.args.username + "|" + data.args.password));
-                        dispatch(push("/dashboard"))
-                    });
-            });
-        }
 
-        return {
-            inProgress: true
-        };
+        action.then(dispatch => {
+            dispatch(new ShowLoading());
+            return fetch(`https://httpbin.org/get?username=${action.username}&password=${action.password}`)
+                .then(x => x.json())
+                .then(data => {
+                    dispatch(new SetToken(data.args.username + "|" + data.args.password));
+                    dispatch(push("/dashboard"));
+                })
+                .finally(() => {
+                    dispatch(new HideLoading());
+                })
+        });
+
+        return state;
     })
 
 
@@ -37,7 +36,7 @@ export const authReducer = new ReducerBuilder<AuthState>()
             dispatch(push("/dashboard"));
         });
 
-        return null;
+        return state;
     })
 
 
@@ -51,8 +50,7 @@ export const authReducer = new ReducerBuilder<AuthState>()
         }
 
         return {
-            token: action.token,
-            inProgress: false
+            token: action.token
         };
     })
 

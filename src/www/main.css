@@ -1,5 +1,7 @@
 html {
   font-family: 'Roboto', sans-serif;
+  position: relative;
+  height: 100%;
 }
 
 body {
