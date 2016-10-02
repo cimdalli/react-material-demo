@@ -14,7 +14,7 @@ export const authReducer = new ReducerBuilder<AuthState>()
 
         action.then(dispatch => {
             dispatch(new ShowLoading());
-            return fetch(`https://httpbin.org/get?username=${action.username}&password=${action.password}`)
+            return fetch(`https://httpbin.org/delay/3?username=${action.username}&password=${action.password}`)
                 .then(x => x.json())
                 .then(data => {
                     dispatch(new SetToken(data.args.username + "|" + data.args.password));

@@ -10,8 +10,6 @@
         "noEmitHelpers": true
     },
     "filesGlob": [
-        "./typings/index.d.ts",
-        "./custom_typings/**/*.d.ts",
-        "./src/**/*.tsx?"
+        "./typings/index.d.ts"
     ]
 }
