@@ -9,7 +9,6 @@ interface PrivateRouteProps extends RouteProps {
 class PrivateRouteContainer extends React.Component<PrivateRouteProps> {
   render() {
     const { isAuthenticated, component: Component, ...rest } = this.props
-    console.log({ isAuthenticated })
 
     return (
       <Route

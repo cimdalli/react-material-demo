@@ -7,18 +7,19 @@ import {
   ConnectedRouter,
 } from 'react-router-redux'
 import { StoreBuilder } from 'redux-ts'
-import createHistory from 'history/createBrowserHistory'
+import { createHashHistory } from 'history'
+import { PrivateRoute } from '../utils/route.helpers'
 
 import { auth } from '../reducers/auth.reducer'
 import { layout } from '../reducers/layout.reducer'
 import { StoreState } from '../models/store.model'
+
 import Layout from './Layout'
 import Login from './Login'
 import { Main } from './Main'
-import { PrivateRoute } from '../utils/route.helpers'
 import Dashboard from './Dashboard'
 
-const history = createHistory()
+const history = createHashHistory()
 const routerMw = routerMiddleware(history)
 const store = new StoreBuilder<StoreState>()
   .withDevTools()
