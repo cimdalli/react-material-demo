@@ -15,9 +15,7 @@ module.exports = merge(common, {
     new UglifyJSPlugin({
       sourceMap: true,
       uglifyOptions: {
-        mangle: {
-          keep_fnames: true,
-        },
+        mangle: false,
       },
     }),
     new TransferWebpackPlugin([{ from: 'public' }]),
