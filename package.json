@@ -15,7 +15,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^4.0.0",
-    "redux-ts": "^3.0.0"
+    "redux-ts": "^4.0.0"
   },
   "devDependencies": {
     "@types/material-ui": "^0.20.8",

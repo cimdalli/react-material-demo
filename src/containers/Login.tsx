@@ -5,13 +5,16 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import { Login } from '../actions/auth.actions'
-import { connect } from '../utils/redux.helpers'
+import { connect } from 'react-redux'
+import { mapDispatchToProps } from 'redux-ts'
 
-interface LoginProps {
-  login: (username: string, password: string) => any
-}
+const dispatchProps = mapDispatchToProps({
+  Login,
+})
 
-class LoginContainer extends React.Component<LoginProps, any> {
+type LoginProps = ReturnType<typeof dispatchProps>
+
+class LoginContainer extends React.Component<LoginProps> {
   refs!: {
     [key: string]: React.ReactInstance
     username: TextField
@@ -19,10 +22,10 @@ class LoginContainer extends React.Component<LoginProps, any> {
   }
 
   login = () => {
-    var username = this.refs.username.getValue()
-    var password = this.refs.password.getValue()
-
-    this.props.login(username, password)
+    this.props.Login({
+      username: this.refs.username.getValue(),
+      password: this.refs.password.getValue(),
+    })
   }
 
   render() {
@@ -59,7 +62,4 @@ class LoginContainer extends React.Component<LoginProps, any> {
   }
 }
 
-export default connect(null, dispatch => ({
-  login: (username: string, password: string) =>
-    dispatch(new Login(username, password)),
-}))(LoginContainer)
+export default connect(null, dispatchProps)(LoginContainer)

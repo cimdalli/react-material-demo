@@ -4,7 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CircularProgress from 'material-ui/CircularProgress'
 
 import { theme } from '../components/theme'
-import { connect } from '../utils/redux.helpers'
+import { mapStoreToProps } from '../utils/redux.helpers'
+import { connect } from 'react-redux'
 
 const innerLoaderContainer = {
   position: 'absolute',
@@ -25,10 +26,12 @@ const loaderOverlay = {
   opacity: 0.2,
 } as React.CSSProperties
 
-interface LayoutProps {
-  useDarkTheme: boolean
-  showLoading: boolean
-}
+const storeProps = mapStoreToProps(store => ({
+  useDarkTheme: !!store.layout.useDarkTheme,
+  showLoading: store.layout.asyncCount > 0,
+}))
+
+type LayoutProps = ReturnType<typeof storeProps>
 
 const LayoutContainer: React.SFC<LayoutProps> = ({
   showLoading,
@@ -50,7 +53,4 @@ const LayoutContainer: React.SFC<LayoutProps> = ({
   </div>
 )
 
-export default connect(store => ({
-  useDarkTheme: !!store.layout.useDarkTheme,
-  showLoading: store.layout.asyncCount > 0,
-}))(LayoutContainer)
+export default connect(storeProps)(LayoutContainer)

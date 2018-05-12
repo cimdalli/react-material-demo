@@ -1,6 +1,5 @@
 const path = require('path')
 const merge = require('webpack-merge')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const TransferWebpackPlugin = require('transfer-webpack-plugin')
 const common = require('./webpack.common.js')
 
@@ -11,13 +10,5 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, output),
   },
-  plugins: [
-    new UglifyJSPlugin({
-      sourceMap: true,
-      uglifyOptions: {
-        mangle: false,
-      },
-    }),
-    new TransferWebpackPlugin([{ from: 'public' }]),
-  ],
+  plugins: [new TransferWebpackPlugin([{ from: 'public' }])],
 })

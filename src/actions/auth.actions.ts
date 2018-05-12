@@ -1,19 +1,16 @@
-import { SyncAction } from 'redux-ts'
+import { createAction } from 'redux-ts'
 
-export class Login extends SyncAction {
-  constructor(public username: string, public password: string) {
-    super()
-  }
+interface LoginPayload {
+  username: string
+  password: string
 }
 
-export class Logout extends SyncAction {}
-
-export class SetToken extends SyncAction {
-  static key = 'auth'
-  constructor(public token?: string) {
-    super()
-  }
-  getTokenKey() {
-    return SetToken.key
-  }
+interface SetTokenPayload {
+  token?: string
 }
+
+export const Login = createAction<LoginPayload>('Login')
+
+export const Logout = createAction('Logout')
+
+export const SetToken = createAction<SetTokenPayload>('SetToken')

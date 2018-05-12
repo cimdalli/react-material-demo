@@ -4582,9 +4582,9 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux-ts@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/redux-ts/-/redux-ts-3.0.1.tgz#d5f24b1d4db82d025f020d426d6678775c2e49e7"
+redux-ts@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/redux-ts/-/redux-ts-4.0.0.tgz#ee8498e848d1668345326402b527fea6bc7436a4"
   dependencies:
     react "^16.3.2"
     react-dom "^16.3.2"

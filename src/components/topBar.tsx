@@ -20,8 +20,8 @@ import {
 } from 'material-ui/Toolbar'
 
 export interface TopBarProps {
-  toggleTheme: () => any
-  logout: () => any
+  ChangeTheme: () => void
+  Logout: () => void
   useDarkTheme: boolean
 }
 
@@ -91,14 +91,14 @@ export class TopBar extends React.Component<TopBarProps, TopBarState> {
 
     const themeToggle = (
       <Toggle
-        onToggle={this.props.toggleTheme}
+        onToggle={this.props.ChangeTheme}
         label={'dark:' + this.props.useDarkTheme}
         toggled={this.props.useDarkTheme}
       />
     )
 
     const logoutButton = (
-      <FlatButton onClick={this.props.logout} label="logout" />
+      <FlatButton onClick={this.props.Logout} label="logout" />
     )
 
     const appBarRightElement = (

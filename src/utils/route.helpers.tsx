@@ -1,10 +1,13 @@
 import * as React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router'
-import { connect } from './redux.helpers'
+import { connect } from 'react-redux'
+import { mapStoreToProps } from './redux.helpers'
 
-interface PrivateRouteProps extends RouteProps {
-  isAuthenticated: boolean
-}
+const storeProps = mapStoreToProps(store => ({
+  isAuthenticated: !!store.auth.token,
+}))
+
+type PrivateRouteProps = RouteProps & ReturnType<typeof storeProps>
 
 class PrivateRouteContainer extends React.Component<PrivateRouteProps> {
   render() {
@@ -30,6 +33,4 @@ class PrivateRouteContainer extends React.Component<PrivateRouteProps> {
   }
 }
 
-export const PrivateRoute = connect(state => ({
-  isAuthenticated: !!state.auth.token,
-}))(PrivateRouteContainer)
+export const PrivateRoute = connect(storeProps)(PrivateRouteContainer)

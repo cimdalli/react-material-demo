@@ -1,6 +1,7 @@
-import { SyncAction } from 'redux-ts'
+import { createAction } from 'redux-ts'
 
+export const ChangeTheme = createAction('ChangeTheme')
 
-export class ChangeTheme extends SyncAction { }
-export class ShowLoading extends SyncAction { }
-export class HideLoading extends SyncAction { }
+export const ShowLoading = createAction('ShowLoading')
+
+export const HideLoading = createAction('HideLoading')

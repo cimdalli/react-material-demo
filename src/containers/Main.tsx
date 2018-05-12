@@ -2,24 +2,29 @@ import * as React from 'react'
 
 import { ChangeTheme } from '../actions/layout.actions'
 import { Logout } from '../actions/auth.actions'
-import { push } from 'react-router-redux'
 
 import { TopBar, TopBarProps } from '../components/topBar'
-import { connect } from '../utils/redux.helpers'
+import { mapStoreToProps } from '../utils/redux.helpers'
+import { connect } from 'react-redux'
+import { mapDispatchToProps } from 'redux-ts'
 
-const MainContainer: React.SFC<TopBarProps> = ({ children, ...rest }) => (
+const storeProps = mapStoreToProps(store => ({
+  useDarkTheme: !!store.layout.useDarkTheme,
+}))
+
+const dispatchProps = mapDispatchToProps({
+  Logout,
+  ChangeTheme,
+})
+
+type MainProps = ReturnType<typeof dispatchProps> &
+  ReturnType<typeof storeProps>
+
+const MainContainer: React.SFC<MainProps> = ({ children, ...rest }) => (
   <div>
     <TopBar {...rest} />
     {children}
   </div>
 )
 
-export const Main = connect(
-  store => ({
-    useDarkTheme: !!store.layout.useDarkTheme,
-  }),
-  dispatch => ({
-    logout: () => dispatch(new Logout()),
-    toggleTheme: () => dispatch(new ChangeTheme()),
-  }),
-)(MainContainer)
+export const Main = connect(storeProps, dispatchProps)(MainContainer)
